@@ -4,7 +4,7 @@ import Collapse from 'react-bootstrap/Collapse';
 import Form from 'react-bootstrap/Form';
 
 
-function AddTranslation() {
+function AddTranslation({ onSubmit }) {
     const [open, setOpen] = useState(false);
 
     return (
@@ -20,7 +20,7 @@ function AddTranslation() {
             <Collapse in={open}>
                 <div id="addtranslation-collapse-form">
                     <br></br>
-                    <Form>
+                    <Form onSubmit={onSubmit}>
                         <Form.Group>
                             <Form.Control type="text" placeholder="type a language" />
                         </Form.Group>
