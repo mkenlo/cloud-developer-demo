@@ -1,14 +1,16 @@
 from config import BaseConfig
 from flask import Flask, jsonify, request, Response
 from flask_caching import Cache
-from model import Translations
+from model import Translations, Languages
 from mongoengine import connect
 from http import HTTPStatus
 import json
+from flask_cors import CORS
 
 
 app = Flask(__name__)
 app.config.from_object(BaseConfig)
+CORS(app)
 
 cache = Cache(app)
 
@@ -40,7 +42,16 @@ def add_translation():
     translate = Translations(
         language=postdata['language'], word=postdata['word'])
     translate.save()
+
+    Languages(language=postdata['language']).save()
     return Response(response=json.dumps(translate.serialize()), status=HTTPStatus.CREATED, content_type='application/json')
+
+
+@app.route("/languages")
+def getTranslations():
+    data = list(map(lambda x: x.serialize(),
+                    Languages.objects().order_by('language')))
+    return Response(response=json.dumps(data), status=HTTPStatus.OK, content_type='application/json')
 
 
 if __name__ == '__main__':
