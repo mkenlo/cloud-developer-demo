@@ -6,7 +6,6 @@ function LanguageDropDown({ languages, onLangChange }) {
     return (
         <Form>
             <Form.Select aria-label="select a language" onChange={onLangChange}>
-                <option value="" disabled={true}>-- Pick a language --</option>
                 {options}
             </Form.Select>
         </Form>

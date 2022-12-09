@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -6,28 +6,32 @@ import HelloNavBar from './components/navbar';
 import AddTranslation from './components/addtranslation';
 import LanguageDropDown from './components/languagedropdown';
 import Card from 'react-bootstrap/Card';
+import fetchTranslation from './service';
 
 
 function App() {
 
   const [translation, setTranslation] = useState("");
+  const [languages, setLanguages] = useState(['pick a language']);
 
-  const languages = ["English", "French", "Spanish", "Russian", "Portuguese"];
-  const translations = [
-    { "language": "english", "word": "hello" },
-    { "language": "french", "word": "salut" },
-    { "language": "russian", "word": "hey" },
-    { "language": "portuguese", "word": "ola" },
-    { "language": "spanish", "word": "hola" }
-  ];
+  useEffect(() => {
+    fetch(`http://localhost:5000/languages`)
+      .then(response => response.json())
+      .then(data => setLanguages(data));
+  }, []);
 
   function showTranslation(lang) {
 
-    let w = translations.filter((item) => item['language'] === lang.toLowerCase());
-    setTranslation(w[0]['word']);
+    fetch(`http://localhost:5000/hello/${lang.toLowerCase()}`)
+      .then(response => response.json())
+      .then(data => {
+        setTranslation(data[0]['word']);
+      })
+      .catch((error) => console.log(error));
   }
 
   function saveTranslation() {
+    // e.preventDefault();
     console.log("saving item...");
   }
 

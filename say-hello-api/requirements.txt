@@ -2,3 +2,4 @@ flask
 flask-caching
 redis
 mongoengine
+flask-cors
