@@ -6,7 +6,6 @@ import HelloNavBar from './components/navbar';
 import AddTranslation from './components/addtranslation';
 import LanguageDropDown from './components/languagedropdown';
 import Card from 'react-bootstrap/Card';
-import fetchTranslation from './service';
 
 
 function App() {
@@ -30,10 +29,6 @@ function App() {
       .catch((error) => console.log(error));
   }
 
-  function saveTranslation() {
-    // e.preventDefault();
-    console.log("saving item...");
-  }
 
 
   return (
@@ -47,15 +42,18 @@ function App() {
                 <Card.Title>
                   <LanguageDropDown languages={languages} onLangChange={(e) => showTranslation(e.target.value)} />
                 </Card.Title>
-                <Card.Text> {translation} </Card.Text>
+                <Card.Text class="translated-word"> {translation} </Card.Text>
               </Card.Body>
             </Card>
           </Col>
           <br></br>
-          <Col md={6}>  <AddTranslation onSubmit={() => saveTranslation()} />    </Col>
+
           <br></br><br></br>
         </Row>
         <hr />
+        <Row>
+          <Col md={6}>  <AddTranslation />    </Col>
+        </Row>
       </main>
     </Container>
   );
