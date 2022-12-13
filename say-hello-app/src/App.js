@@ -16,7 +16,7 @@ function App() {
   useEffect(() => {
     fetch(`http://localhost:5000/languages`)
       .then(response => response.json())
-      .then(data => setLanguages(data));
+      .then(data => setLanguages(data)); 
   }, []);
 
   function showTranslation(lang) {
@@ -36,12 +36,14 @@ function App() {
       <HelloNavBar />
       <main>
         <Row>
-          <Col md={6}>
-            <Card>
+          <Col md={9}>
+            <Card border='secondary'>
               <Card.Body>
                 <Card.Title>
-                  <LanguageDropDown languages={languages} onLangChange={(e) => showTranslation(e.target.value)} />
+
                 </Card.Title>
+                <LanguageDropDown languages={languages} onLangChange={(e) => showTranslation(e.target.value)} />
+                <br></br>
                 <Card.Text class="translated-word"> {translation} </Card.Text>
               </Card.Body>
             </Card>
