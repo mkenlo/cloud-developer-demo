@@ -1,5 +1,5 @@
 flask
 flask-caching
-redis
-mongoengine
 flask-cors
+mongoengine
+python-dotenv

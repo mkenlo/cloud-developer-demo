@@ -1,2 +1,5 @@
-env.sh
+
 venv/
+*.md
+*.MD
+__pycache__/
