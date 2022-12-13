@@ -1,0 +1,32 @@
+version: '3'
+services:
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    environment:
+      MONGODB_INITDB_ROOT_USERNAME: root
+      MONGODB_INITDB_ROOT_PASSWORD: oui
+    volumes:
+      - mongodb_data:/data/db
+  api:
+    build: say-hello-api
+    container_name: sayhelloapi
+    ports:
+      - 5000:5000
+    environment:
+      SAYHELLO_DB_URL: "mongodb://mongodb:27017/hellodb"
+      SAYHELLO_APP_SECRET_KEY: sdjfiemfadfqiuoeirue
+      SAYHELLO_DB_USER: test
+      SAYHELLO_DB_PASSWORD: test
+      SAYHELLO_DB_NAME: hellodb
+      SAYHELLO_DB_HOST: localhost
+      SAYHELLO_DB_PORT: 27017
+    depends_on:
+      - mongodb
+  app:
+    build: say-hello-app
+    container_name: sayhelloapp
+    ports:
+      - 3000:3000
+volumes:
+  mongodb_data:
