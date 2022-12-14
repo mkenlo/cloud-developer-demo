@@ -9,7 +9,8 @@ services:
     volumes:
       - mongodb_data:/data/db
   api:
-    build: say-hello-api
+    build: say-hello-api/.
+    image: say-hello-api
     container_name: sayhelloapi
     ports:
       - 5000:5000
@@ -24,7 +25,8 @@ services:
     depends_on:
       - mongodb
   app:
-    build: say-hello-app
+    build: say-hello-app/.
+    image: say-hello-app
     container_name: sayhelloapp
     ports:
       - 3000:3000
