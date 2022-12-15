@@ -30,4 +30,4 @@ spec:
               value: "mongodb+srv://admin:admin@cluster0.rdfrjcr.mongodb.net/hellodb"
             - name: SAYHELLO_APP_SECRET_KEY
               value: "k8ssupersecretkey"
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always

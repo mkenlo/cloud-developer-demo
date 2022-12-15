@@ -17,5 +17,10 @@ spec:
       containers:
         - name: webapp
           image: mkenlo/say-hello-app
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          imagePullPolicy: Always
           ports:
-            - containerPort: 3000
+            - containerPort: 80

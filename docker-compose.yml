@@ -29,6 +29,6 @@ services:
     image: say-hello-app
     container_name: sayhelloapp
     ports:
-      - 3000:3000
+      - 3000:80
 volumes:
   mongodb_data:

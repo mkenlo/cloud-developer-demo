@@ -8,5 +8,5 @@ spec:
     app: webapp
   ports:
     - port: 80
-      targetPort: 3000
-      nodePort: 30001
+      targetPort: 80
+      nodePort: 31000
