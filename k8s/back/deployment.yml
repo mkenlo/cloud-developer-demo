@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  labels:
+    app: backend
+    component: back
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+        component: back
+    spec:
+      containers:
+        - name: backend-api
+          image: mkenlo/say-hello-api
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 5000
+          env:
+            - name: SAYHELLO_DB_URL
+              value: "mongodb+srv://admin:admin@cluster0.rdfrjcr.mongodb.net/hellodb"
+            - name: SAYHELLO_APP_SECRET_KEY
+              value: "k8ssupersecretkey"
+          imagePullPolicy: IfNotPresent
